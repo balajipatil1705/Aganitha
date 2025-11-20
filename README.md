@@ -34,3 +34,27 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+
+## MiniShort (URL shortener)
+
+This repo implements a small URL shortener with the following conventions (used by automated tests):
+
+- `GET /healthz` → returns 200 JSON { ok: true, version: '1.0' }
+- `POST /api/links` → create link (409 if custom code already exists)
+- `GET /api/links` → list links
+- `GET /api/links/:code` → get link stats
+- `DELETE /api/links/:code` → delete link
+- `GET /:code` → redirects (302) to target and increments click count
+
+Required env vars: see `.env.example`.
+
+Run locally:
+
+```powershell
+copy .env.example .env
+# edit .env with your DATABASE_URL
+npm install
+npm run dev
+```
+
+The dashboard is at `/` and single-link stats are at `/code/:code`.
